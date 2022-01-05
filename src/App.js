@@ -1,25 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import { LeftBar, Horoscope, Result, ArrowBtn } from './components/index';
+import { useState } from 'react';
+import './styles/arrowBtn.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+  const [show, setShow] = useState(true);
+  const [tabToggle, setTabToggle] = useState(true);
+  const [data, setData] = useState();
+  const [zodiac, setZodiac] = useState('Aries');
+  const [day, setDay] = useState('Today');
+  const [loading , setLoading ] = useState(false);
+
+  return <div className='container'>
+    <LeftBar show={show} setShow={setShow} />
+    {tabToggle ?
+    <div className='horoscopeBtnCon'>
+      <Horoscope zodiac={zodiac} setZodiac={setZodiac} day={day} setDay={setDay} />
+      <ArrowBtn setData={setData} tabToggle={tabToggle} setTabToggle={setTabToggle} />
+    </div> : <Result setData={setData} tabToggle={tabToggle} setTabToggle={setTabToggle} loading={loading} setLoading={setLoading} zodiac={zodiac} day={day} data={data} setData={setData} /> }
+
+  </div>
+};
 
 export default App;
